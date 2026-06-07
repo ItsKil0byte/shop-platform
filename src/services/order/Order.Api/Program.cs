@@ -37,6 +37,11 @@ builder.Services.AddGrpcClient<Cart.Grpc.CartService.CartServiceClient>(options 
     options.Address = new Uri("http://localhost:5002");
 });
 
+builder.Services.AddGrpcClient<Payment.Grpc.PaymentService.PaymentServiceClient>(options =>
+{
+    options.Address = new Uri("http://localhost:5003");
+});
+
 // Конфигурация приложения
 
 WebApplication app = builder.Build();

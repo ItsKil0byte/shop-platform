@@ -30,7 +30,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"DrBlury.protobuf-vsc"
 			]
 		}
 	},

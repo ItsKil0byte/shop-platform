@@ -34,7 +34,7 @@ public class OrderService(
             order.UpdateStatus(OrderStatus.CheckingUser);
             await _orderRepository.UpdateAsync(order, cancellationToken);
 
-            bool isBlocked = await _moderationClient.IsUserBannedAsync(userId);
+            bool isBlocked = await _moderationClient.IsUserBannedAsync(userId, cancellationToken);
             if (isBlocked)
             {
                 await RollbackOrderAsync(order, "Пользователь заблокирован", cancellationToken);
@@ -43,7 +43,7 @@ public class OrderService(
 
             // 3. Получаем информацию о корзине
 
-            (decimal totalPrice, List<CartItemDto> cartItems) = await _cartClient.GetCartAsync(userId);
+            (decimal totalPrice, List<CartItemDto> cartItems) = await _cartClient.GetCartAsync(userId, cancellationToken);
             if (totalPrice <= 0 || cartItems.Count == 0)
             {
                 await RollbackOrderAsync(order, "Корзина пуста", cancellationToken);
@@ -59,7 +59,7 @@ public class OrderService(
 
             // 5. Процесс оплаты
 
-            (bool isSuccess, string? paymentId) = await _paymentClient.ProcessPaymentAsync(order.Id.ToString(), userId, totalPrice);
+            (bool isSuccess, string? paymentId) = await _paymentClient.ProcessPaymentAsync(order.Id.ToString(), userId, totalPrice, cancellationToken);
 
             if (!isSuccess)
             {
@@ -87,7 +87,7 @@ public class OrderService(
         
     }
 
-    public async Task RollbackOrderAsync(OrderEntity order, string reason, CancellationToken cancellationToken = default)
+    private async Task RollbackOrderAsync(OrderEntity order, string reason, CancellationToken cancellationToken = default)
     {
         order.UpdateStatus(OrderStatus.Cancelled);
         await _orderRepository.UpdateAsync(order, cancellationToken);

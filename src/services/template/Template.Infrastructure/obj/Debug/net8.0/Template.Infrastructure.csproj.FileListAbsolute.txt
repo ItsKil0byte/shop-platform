@@ -1,0 +1,17 @@
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Infrastructure.deps.json
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Infrastructure.dll
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Infrastructure.pdb
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Application.dll
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Domain.dll
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Application.pdb
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/bin/Debug/net8.0/Template.Domain.pdb
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.csproj.AssemblyReference.cache
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.AssemblyInfoInputs.cache
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.AssemblyInfo.cs
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.csproj.CoreCompileInputs.cache
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.355AE52C.Up2Date
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.dll
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/refint/Template.Infrastructure.dll
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/Template.Infrastructure.pdb
+/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/Debug/net8.0/ref/Template.Infrastructure.dll

@@ -1,0 +1,15 @@
+/workspaces/shop-platform/src/services/template/Template.Application/bin/Debug/net8.0/Template.Application.deps.json
+/workspaces/shop-platform/src/services/template/Template.Application/bin/Debug/net8.0/Template.Application.dll
+/workspaces/shop-platform/src/services/template/Template.Application/bin/Debug/net8.0/Template.Application.pdb
+/workspaces/shop-platform/src/services/template/Template.Application/bin/Debug/net8.0/Template.Domain.dll
+/workspaces/shop-platform/src/services/template/Template.Application/bin/Debug/net8.0/Template.Domain.pdb
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.csproj.AssemblyReference.cache
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.AssemblyInfoInputs.cache
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.AssemblyInfo.cs
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.csproj.CoreCompileInputs.cache
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.D17F1E30.Up2Date
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.dll
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/refint/Template.Application.dll
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/Template.Application.pdb
+/workspaces/shop-platform/src/services/template/Template.Application/obj/Debug/net8.0/ref/Template.Application.dll

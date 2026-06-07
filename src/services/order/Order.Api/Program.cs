@@ -25,6 +25,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddScoped<ICartClient, CartGrpcClient>();
 builder.Services.AddScoped<IModerationClient, ModerationGrpcClient>();
+builder.Services.AddScoped<IPaymentClient, PaymentGrpcClient>();
 
 builder.Services.AddGrpcClient<Moderation.Grpc.ModerationService.ModerationServiceClient>(options =>
 {

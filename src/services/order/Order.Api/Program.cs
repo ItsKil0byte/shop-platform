@@ -1,44 +1,52 @@
-var builder = WebApplication.CreateBuilder(args);
+using Order.Application.Interfaces;
+using Order.Application.Services;
+using Order.Infrastructure.Persistence;
+using Order.Infrastructure.Messaging;
+using Order.Infrastructure.GrpcClients;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Регистрация контроллеров
+
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+// Регистрация зависимостей
 
-// Configure the HTTP request pipeline.
+builder.Services.AddSingleton<IOrderRepository, InMemoryOrderRepository>();
+builder.Services.AddSingleton<IEventPublisher, ConsoleEventPublisher>();
+
+// Регистрация бизнес-логики
+
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+// Регистрация gRPC клиентов
+
+builder.Services.AddScoped<ICartClient, CartGrpcClient>();
+builder.Services.AddScoped<IModerationClient, ModerationGrpcClient>();
+
+builder.Services.AddGrpcClient<Moderation.Grpc.ModerationService.ModerationServiceClient>(options =>
+{
+    options.Address = new Uri("http://localhost:5001");
+});
+
+builder.Services.AddGrpcClient<Cart.Grpc.CartService.CartServiceClient>(options =>
+{
+    options.Address = new Uri("http://localhost:5002");
+});
+
+// Конфигурация приложения
+
+WebApplication app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

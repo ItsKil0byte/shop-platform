@@ -20,10 +20,10 @@ public class OrderController(IOrderService orderService, IOrderRepository orderR
             return BadRequest("ID пользователя не может быть пустым.");
         }
 
-        Guid orderIdStr = await _orderService.CreateOrderAsync(request.UserId);
+        Guid orderId = await _orderService.CreateOrderAsync(request.UserId);
 
-        OrderEntity? order = await _orderRepository.GetByIdAsync(orderIdStr);
-        
+        OrderEntity? order = await _orderRepository.GetByIdAsync(orderId);
+
         if (order == null)
         {
             return NotFound("Заказ не найден.");

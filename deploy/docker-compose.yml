@@ -1,0 +1,22 @@
+
+services:
+  order-db:
+    image: postgres:17-alpine
+    container_name: order-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: OrderDb
+    ports:
+      - "5435:5432"
+    volumes:
+      - order-db-data:/var/lib/postgresql/data
+    networks:
+      - shop-platform-network
+
+volumes:
+  order-db-data:
+
+networks:
+  shop-platform-network:
+    driver: bridge

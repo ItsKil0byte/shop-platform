@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<OrderDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddSingleton<IOrderRepository, EFOrderRepository>();
+builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 builder.Services.AddSingleton<IEventPublisher, ConsoleEventPublisher>();
 
 // Регистрация бизнес-логики

@@ -4,6 +4,8 @@ using Order.Infrastructure.Persistence;
 using Order.Infrastructure.Messaging;
 using Order.Infrastructure.GrpcClients;
 
+using Microsoft.EntityFrameworkCore;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Регистрация контроллеров
@@ -14,7 +16,10 @@ builder.Services.AddSwaggerGen();
 
 // Регистрация зависимостей
 
-builder.Services.AddSingleton<IOrderRepository, InMemoryOrderRepository>();
+builder.Services.AddDbContext<OrderDBContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 builder.Services.AddSingleton<IEventPublisher, ConsoleEventPublisher>();
 
 // Регистрация бизнес-логики

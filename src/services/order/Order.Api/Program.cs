@@ -34,20 +34,20 @@ builder.Services.AddScoped<IPaymentClient, PaymentGrpcClient>();
 
 builder.Services.AddGrpcClient<Moderation.Grpc.ModerationService.ModerationServiceClient>(options =>
 {
-    string address = builder.Configuration["GrpcClients:ModerationUrl"] ?? "http://localhost:5001";
+    string address = builder.Configuration["GrpcClients:ModerationUrl"] ?? "http://localhost:5081";
     options.Address = new Uri(address);
 });
 
 builder.Services.AddGrpcClient<Cart.Grpc.CartService.CartServiceClient>(options =>
 {
-    string address = builder.Configuration["GrpcClients:CartUrl"] ?? "http://localhost:5002";
+    string address = builder.Configuration["GrpcClients:CartUrl"] ?? "http://localhost:5082";
     options.Address = new Uri(address);
 });
 
 builder.Services.AddGrpcClient<Payment.Grpc.PaymentService.PaymentServiceClient>(options =>
 {
-    string address = builder.Configuration["GrpcClients:PaymentUrl"] ?? "http://localhost:5003";
-    options.Address = new Uri("http://localhost:5003");
+    string address = builder.Configuration["GrpcClients:PaymentUrl"] ?? "http://localhost:5083";
+    options.Address = new Uri(address);
 });
 
 // Конфигурация приложения

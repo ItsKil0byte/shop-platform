@@ -11,11 +11,11 @@
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		5000,
-		5001, // Gateway / API
-		5432, // PostgreSQL
-		5672,
-		15672, // RabbitMQ (клиент + UI)
+		5080, // Order API
+		5081, // Moderation API
+		5435, // Order DB
+		5672, // RabbitMQ
+		15672, // RabbitMQ 
 		8500 // Consul UI
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.

@@ -12,6 +12,9 @@ builder.Services.AddDbContext<CatalogDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<Catalog.Application.Interfaces.ICatalogRepository, Catalog.Infrastructure.Persistence.CatalogRepository>();
+builder.Services.AddScoped<Catalog.Application.Interfaces.IProductService, Catalog.Application.Services.ProductService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

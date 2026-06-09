@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "5B+/P4m8m3k=",
+  "dgSpecHash": "HZ7PBe0lrIE=",
   "success": true,
-  "projectFilePath": "/workspaces/shop-platform/src/services/template/Template.Domain/Template.Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\Template.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\razin\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\razin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\razin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512"
+  ],
   "logs": []
 }

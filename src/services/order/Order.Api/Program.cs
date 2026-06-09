@@ -34,16 +34,19 @@ builder.Services.AddScoped<IPaymentClient, PaymentGrpcClient>();
 
 builder.Services.AddGrpcClient<Moderation.Grpc.ModerationService.ModerationServiceClient>(options =>
 {
-    options.Address = new Uri("http://localhost:5001");
+    string address = builder.Configuration["GrpcClients:ModerationUrl"] ?? "http://localhost:5001";
+    options.Address = new Uri(address);
 });
 
 builder.Services.AddGrpcClient<Cart.Grpc.CartService.CartServiceClient>(options =>
 {
-    options.Address = new Uri("http://localhost:5002");
+    string address = builder.Configuration["GrpcClients:CartUrl"] ?? "http://localhost:5002";
+    options.Address = new Uri(address);
 });
 
 builder.Services.AddGrpcClient<Payment.Grpc.PaymentService.PaymentServiceClient>(options =>
 {
+    string address = builder.Configuration["GrpcClients:PaymentUrl"] ?? "http://localhost:5003";
     options.Address = new Uri("http://localhost:5003");
 });
 

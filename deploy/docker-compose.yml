@@ -1,4 +1,3 @@
-
 services:
   order-db:
     image: postgres:17-alpine
@@ -21,11 +20,23 @@ services:
       context: ../
       dockerfile: src/services/order/Order.Api/Dockerfile
     ports:
-      - "5055:8080"
+      - "5080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
       - order-db
+      - moderation-api
+    networks:
+      - shop-platform-network
+
+  moderation-api:
+    image: shop-platform/moderation-api:latest
+    container_name: moderation-api
+    build:
+      context: ../
+      dockerfile: src/services/moderation/Moderation.Api/Dockerfile
+    ports:
+      - "5081:8080"
     networks:
       - shop-platform-network
 

@@ -511,4 +511,5 @@ $RECYCLE.BIN/
 *.swp
 
 # Local dotnet cache
+dotnet/
 .dotnet/

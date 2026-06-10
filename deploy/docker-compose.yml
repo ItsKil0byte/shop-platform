@@ -1,4 +1,5 @@
 services:
+
   seq:
     image: datalust/seq:latest
     container_name: seq
@@ -163,8 +164,8 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5672:5672"   # AMQP
+      - "15672:15672" # UI (guest/guest)
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 10s
@@ -201,9 +202,25 @@ services:
     networks:
       - shop-platform-network
 
+  notification-worker:
+     image: shop-platform/notification-worker:latest
+     container_name: notification-worker
+     build:
+       context: ../
+       dockerfile: src/services/notification/Notification.Worker/Dockerfile
+     environment:
+       - RabbitMq__Host=rabbitmq
+     depends_on:
+       rabbitmq:
+         condition: service_healthy
+     networks:
+       - shop-platform-network
+      
 volumes:
   auth-db-data:
   order-db-data:
+  catalog-db-data:
+  cart-db-data:
   payment-db-data:
 
 networks:

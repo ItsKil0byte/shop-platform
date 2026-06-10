@@ -18,6 +18,10 @@ public static class SerilogExtensions
             .Enrich.FromLogContext()
             .Enrich.WithProperty("Service", serviceName);
 
+        // Подключение seq
+        string seqUrl = builder.Configuration["Logging:SeqUrl"] ?? "http://localhost:5341";
+        loggerConfiguration.WriteTo.Seq(seqUrl);
+
         if (builder.Environment.IsDevelopment())
         {
             // Для локального запуска

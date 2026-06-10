@@ -1,4 +1,16 @@
 services:
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_NOAUTHENTICATION=true
+    ports:
+      - "5341:80"
+    networks:
+      - shop-platform-network
+
   order-db:
     image: postgres:17-alpine
     container_name: order-db
@@ -23,6 +35,7 @@ services:
       - "5080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - Logging__SeqUrl=http://seq:80
     depends_on:
       - order-db
       - moderation-api
@@ -36,6 +49,8 @@ services:
     build:
       context: ../
       dockerfile: src/services/moderation/Moderation.Api/Dockerfile
+    environment:
+      - Logging__SeqUrl=http://seq:80
     ports:
       - "5081:8080"
     networks:
@@ -55,7 +70,7 @@ services:
     networks:
       - shop-platform-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -72,7 +87,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
       payment-db:
-        condition: service_healthy 
+        condition: service_healthy
     networks:
       - shop-platform-network
 

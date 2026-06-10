@@ -72,6 +72,21 @@ services:
     networks:
       - shop-platform-network
   
+  cart-api:
+    image: shop-platform/cart-api:latest
+    container_name: cart-api
+    build:
+      context: ../
+      dockerfile: src/services/cart/Cart.Api/Dockerfile
+    ports:
+      - "5057:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - cart-db
+    networks:
+      - shop-platform-network
+  
 volumes:
   order-db-data:
   catalog-db-data:

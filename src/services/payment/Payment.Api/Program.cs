@@ -1,3 +1,4 @@
+using BuildingBlocks.Consul;
 using Microsoft.EntityFrameworkCore;
 using Payment.Application.Interfaces;
 using Payment.Application.Services;
@@ -7,23 +8,26 @@ using Payment.Infrastructure.Persistence;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // БД
-
 builder.Services.AddDbContext<PaymentDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Репозиторий и бизнес-логика
-
 builder.Services.AddScoped<IPaymentRepository, EFPaymentRepository>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 // gRPC сервер
-
 builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 
+builder.Services.AddHealthChecks();
+builder.Services.AddGrpcHealthChecks();
+
+// Consul
+builder.Services.AddConsul(builder.Configuration);
+
 WebApplication app = builder.Build();
 
-// Автоматически применяем миграции при старте
+// Миграции
 using (IServiceScope scope = app.Services.CreateScope())
 {
     PaymentDbContext db = scope.ServiceProvider.GetRequiredService<PaymentDbContext>();
@@ -31,9 +35,12 @@ using (IServiceScope scope = app.Services.CreateScope())
 }
 
 app.MapGrpcService<PaymentGrpcService>();
+app.MapGrpcHealthChecksService();
 app.MapGrpcReflectionService();
 
-// Healthcheck — удобно для docker-compose depends_on
 app.MapGet("/health", () => Results.Ok("Payment Service is running"));
+
+// Регистрация в Consul
+app.UseConsul();
 
 app.Run();

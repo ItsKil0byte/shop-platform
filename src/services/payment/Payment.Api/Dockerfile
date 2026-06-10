@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY contracts/ /app/contracts/
 
+COPY src/building-blocks/ /app/src/building-blocks/
+
 COPY src/services/payment/Payment.Domain/ /app/src/services/payment/Payment.Domain/
 COPY src/services/payment/Payment.Application/ /app/src/services/payment/Payment.Application/
 COPY src/services/payment/Payment.Infrastructure/ /app/src/services/payment/Payment.Infrastructure/

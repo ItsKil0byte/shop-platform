@@ -58,9 +58,24 @@ services:
     networks:
       - shop-platform-network
   
+  cart-db:
+    image: postgres:17-alpine
+    container_name: cart-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: CartDb
+    ports:
+      - "5433:5432"
+    volumes:
+      - cart-db-data:/var/lib/postgresql/data
+    networks:
+      - shop-platform-network
+  
 volumes:
   order-db-data:
   catalog-db-data:
+  cart-db-data:
 
 networks:
   shop-platform-network:

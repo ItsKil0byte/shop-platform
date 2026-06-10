@@ -1,0 +1,26 @@
+@Auth_HostAddress = http://localhost:5050
+
+POST {{Auth_HostAddress}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123",
+  "name": "User"
+}
+
+###
+
+POST {{Auth_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+###
+
+GET {{Auth_HostAddress}}/auth/me
+Authorization: Bearer replace-with-token
+

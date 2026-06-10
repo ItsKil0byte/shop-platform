@@ -13,10 +13,10 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		5000, 5001,  // Gateway / API
-		5432,        // PostgreSQL
-		5672, 15672, // RabbitMQ (клиент + UI)
-		8500         // Consul UI
+		5000, 5050, 5055, // Gateway / Auth / Order
+		5432, 5435, 5436, // PostgreSQL
+		5672, 15672,      // RabbitMQ client + UI
+		8500              // Consul UI
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
@@ -34,5 +34,6 @@
 				"DrBlury.protobuf-vsc"
 			]
 		}
-	},
+	}
 }
+

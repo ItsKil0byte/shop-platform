@@ -11,9 +11,6 @@
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		5080, // Order API
-		5081, // Moderation API
-		5435, // Order DB
 		5672, // RabbitMQ
 		15672, // RabbitMQ 
 		8500 // Consul UI

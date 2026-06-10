@@ -20,7 +20,8 @@ builder.Services.AddDbContext<OrderDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
-builder.Services.AddSingleton<IEventPublisher, ConsoleEventPublisher>();
+string rabbitHost = builder.Configuration["RabbitMq:Host"] ?? "rabbitmq";
+builder.Services.AddSingleton<IEventPublisher>(_ => new RabbitMqEventPublisher(rabbitHost));
 
 // Регистрация бизнес-логики
 
@@ -53,6 +54,12 @@ builder.Services.AddGrpcClient<Payment.Grpc.PaymentService.PaymentServiceClient>
 // Конфигурация приложения
 
 WebApplication app = builder.Build();
+
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    OrderDBContext db = scope.ServiceProvider.GetRequiredService<OrderDBContext>();
+    db.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {

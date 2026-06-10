@@ -9,7 +9,6 @@
     <ItemGroup>
       <Folder Include="GrpcClients\" />
       <Folder Include="Messaging\" />
-      <Folder Include="Persistence\" />
     </ItemGroup>
 
     <ItemGroup>

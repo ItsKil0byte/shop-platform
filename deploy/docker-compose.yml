@@ -26,6 +26,7 @@ services:
     depends_on:
       - order-db
       - moderation-api
+      - payment-api
     networks:
       - shop-platform-network
 
@@ -40,8 +41,44 @@ services:
     networks:
       - shop-platform-network
 
+  payment-db:
+    image: postgres:17-alpine
+    container_name: payment-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: PaymentDb
+    ports:
+      - "5436:5432"
+    volumes:
+      - payment-db-data:/var/lib/postgresql/data
+    networks:
+      - shop-platform-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  payment-api:
+    image: shop-platform/payment-api:latest
+    container_name: payment-api
+    build:
+      context: ../
+      dockerfile: src/services/payment/Payment.Api/Dockerfile
+    ports:
+      - "5003:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      payment-db:
+        condition: service_healthy 
+    networks:
+      - shop-platform-network
+
 volumes:
   order-db-data:
+  payment-db-data:
 
 networks:
   shop-platform-network:

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/shop-platform/src/services/template/Template.Api/Template.Api.csproj": {}
+    "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Api\\Template.Api.csproj": {}
   },
   "projects": {
-    "/workspaces/shop-platform/src/services/template/Template.Api/Template.Api.csproj": {
+    "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Api\\Template.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/shop-platform/src/services/template/Template.Api/Template.Api.csproj",
+        "projectUniqueName": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Api\\Template.Api.csproj",
         "projectName": "Template.Api",
-        "projectPath": "/workspaces/shop-platform/src/services/template/Template.Api/Template.Api.csproj",
-        "packagesPath": "/home/vscode/.nuget/packages/",
-        "outputPath": "/workspaces/shop-platform/src/services/template/Template.Api/obj/",
+        "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Api\\Template.Api.csproj",
+        "packagesPath": "C:\\Users\\razin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/vscode/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\razin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -24,10 +24,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/workspaces/shop-platform/src/services/template/Template.Infrastructure/Template.Infrastructure.csproj": {
-                "projectPath": "/workspaces/shop-platform/src/services/template/Template.Infrastructure/Template.Infrastructure.csproj"
+              "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Infrastructure\\Template.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Infrastructure\\Template.Infrastructure.csproj"
               }
             }
           }
@@ -41,10 +42,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
@@ -67,6 +70,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -75,21 +96,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.421/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/workspaces/shop-platform/src/services/template/Template.Application/Template.Application.csproj": {
+    "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Application\\Template.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/shop-platform/src/services/template/Template.Application/Template.Application.csproj",
+        "projectUniqueName": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Application\\Template.Application.csproj",
         "projectName": "Template.Application",
-        "projectPath": "/workspaces/shop-platform/src/services/template/Template.Application/Template.Application.csproj",
-        "packagesPath": "/home/vscode/.nuget/packages/",
-        "outputPath": "/workspaces/shop-platform/src/services/template/Template.Application/obj/",
+        "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Application\\Template.Application.csproj",
+        "packagesPath": "C:\\Users\\razin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/vscode/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\razin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -99,10 +120,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/workspaces/shop-platform/src/services/template/Template.Domain/Template.Domain.csproj": {
-                "projectPath": "/workspaces/shop-platform/src/services/template/Template.Domain/Template.Domain.csproj"
+              "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\Template.Domain.csproj": {
+                "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\Template.Domain.csproj"
               }
             }
           }
@@ -116,10 +138,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -132,26 +156,40 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.421/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/workspaces/shop-platform/src/services/template/Template.Domain/Template.Domain.csproj": {
+    "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\Template.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/shop-platform/src/services/template/Template.Domain/Template.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\Template.Domain.csproj",
         "projectName": "Template.Domain",
-        "projectPath": "/workspaces/shop-platform/src/services/template/Template.Domain/Template.Domain.csproj",
-        "packagesPath": "/home/vscode/.nuget/packages/",
-        "outputPath": "/workspaces/shop-platform/src/services/template/Template.Domain/obj/",
+        "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\Template.Domain.csproj",
+        "packagesPath": "C:\\Users\\razin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/vscode/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\razin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -161,6 +199,7 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -174,10 +213,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -190,26 +231,40 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.421/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/workspaces/shop-platform/src/services/template/Template.Infrastructure/Template.Infrastructure.csproj": {
+    "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Infrastructure\\Template.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/shop-platform/src/services/template/Template.Infrastructure/Template.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Infrastructure\\Template.Infrastructure.csproj",
         "projectName": "Template.Infrastructure",
-        "projectPath": "/workspaces/shop-platform/src/services/template/Template.Infrastructure/Template.Infrastructure.csproj",
-        "packagesPath": "/home/vscode/.nuget/packages/",
-        "outputPath": "/workspaces/shop-platform/src/services/template/Template.Infrastructure/obj/",
+        "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Infrastructure\\Template.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\razin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/vscode/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\razin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -219,10 +274,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/workspaces/shop-platform/src/services/template/Template.Application/Template.Application.csproj": {
-                "projectPath": "/workspaces/shop-platform/src/services/template/Template.Application/Template.Application.csproj"
+              "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Application\\Template.Application.csproj": {
+                "projectPath": "C:\\Users\\razin\\Downloads\\shop-platform\\src\\services\\template\\Template.Application\\Template.Application.csproj"
               }
             }
           }
@@ -236,10 +292,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -252,12 +310,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.421/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

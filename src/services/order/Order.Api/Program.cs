@@ -3,10 +3,15 @@ using Order.Application.Services;
 using Order.Infrastructure.Persistence;
 using Order.Infrastructure.Messaging;
 using Order.Infrastructure.GrpcClients;
+using BuildingBlocks.Logging;
 
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Подключаем логирование
+
+builder.ConfigureLogging("OrderService");
 
 // Регистрация контроллеров
 
@@ -20,7 +25,8 @@ builder.Services.AddDbContext<OrderDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
-builder.Services.AddSingleton<IEventPublisher, ConsoleEventPublisher>();
+string rabbitHost = builder.Configuration["RabbitMq:Host"] ?? "rabbitmq";
+builder.Services.AddSingleton<IEventPublisher>(_ => new RabbitMqEventPublisher(rabbitHost));
 
 // Регистрация бизнес-логики
 
@@ -34,22 +40,31 @@ builder.Services.AddScoped<IPaymentClient, PaymentGrpcClient>();
 
 builder.Services.AddGrpcClient<Moderation.Grpc.ModerationService.ModerationServiceClient>(options =>
 {
-    options.Address = new Uri("http://localhost:5001");
+    string address = builder.Configuration["GrpcClients:ModerationUrl"] ?? "http://localhost:5081";
+    options.Address = new Uri(address);
 });
 
 builder.Services.AddGrpcClient<Cart.Grpc.CartService.CartServiceClient>(options =>
 {
-    options.Address = new Uri("http://localhost:5002");
+    string address = builder.Configuration["GrpcClients:CartUrl"] ?? "http://localhost:5082";
+    options.Address = new Uri(address);
 });
 
 builder.Services.AddGrpcClient<Payment.Grpc.PaymentService.PaymentServiceClient>(options =>
 {
-    options.Address = new Uri("http://localhost:5003");
+    string address = builder.Configuration["GrpcClients:PaymentUrl"] ?? "http://localhost:5083";
+    options.Address = new Uri(address);
 });
 
 // Конфигурация приложения
 
 WebApplication app = builder.Build();
+
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    OrderDBContext db = scope.ServiceProvider.GetRequiredService<OrderDBContext>();
+    db.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {

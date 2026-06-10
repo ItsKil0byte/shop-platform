@@ -1,3 +1,4 @@
+using Cart.Api.Grpc;
 using Cart.Application.Interfaces;
 using Cart.Application.Services;
 using Cart.Infrastructure.Persistence;
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<CartDbContext>(options =>
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICartService, CartService>();
+
+builder.Services.AddGrpc();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -28,5 +31,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGrpcService<CartGrpcService>();
 
 app.Run();

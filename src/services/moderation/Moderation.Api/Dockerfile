@@ -6,6 +6,8 @@ COPY contracts/ /app/contracts/
 
 COPY src/services/moderation/Moderation.Api/ /app/src/services/moderation/Moderation.Api/
 
+COPY src/building-blocks/ /app/src/building-blocks/
+
 WORKDIR /app/src/services/moderation/Moderation.Api
 
 RUN dotnet restore

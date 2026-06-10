@@ -10,6 +10,8 @@ COPY src/services/order/Order.Application/ /app/src/services/order/Order.Applica
 COPY src/services/order/Order.Infrastructure/ /app/src/services/order/Order.Infrastructure/
 COPY src/services/order/Order.Api/ /app/src/services/order/Order.Api/
 
+COPY src/building-blocks/ /app/src/building-blocks/
+
 WORKDIR /app/src/services/order/Order.Api
 
 RUN dotnet restore

@@ -16,4 +16,8 @@
     <Protobuf Include="..\..\..\..\contracts\grpc\moderation.proto" GrpcServices="Server" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\building-blocks\logging\BuildingBlocks.Logging\BuildingBlocks.Logging.csproj" />
+  </ItemGroup>
+
 </Project>

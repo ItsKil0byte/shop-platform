@@ -1,3 +1,5 @@
+using Cart.Application.Interfaces;
+using Cart.Application.Services;
 using Cart.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<CartDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

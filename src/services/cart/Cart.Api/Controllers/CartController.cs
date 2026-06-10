@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cart.Application.DTOs;
+using Cart.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cart.Api.Controllers;
 
@@ -6,9 +8,31 @@ namespace Cart.Api.Controllers;
 [Route("api/[controller]")]
 public class CartController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Get()
+    private readonly ICartService _cartService;
+
+    public CartController(ICartService cartService)
     {
-        return Ok(new { message = "Cart API is working!" });
+        _cartService = cartService;
+    }
+
+    [HttpGet("{userId}")]
+    public async Task<ActionResult<CartDto>> GetCart(string userId)
+    {
+        var cart = await _cartService.GetCartAsync(userId);
+        return Ok(cart);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> AddItem([FromBody] AddToCartDto dto)
+    {
+        await _cartService.AddItemToCartAsync(dto);
+        return Ok();
+    }
+
+    [HttpDelete("{userId}")]
+    public async Task<IActionResult> ClearCart(string userId)
+    {
+        await _cartService.ClearCartAsync(userId);
+        return Ok();
     }
 }

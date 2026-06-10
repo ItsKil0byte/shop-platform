@@ -35,6 +35,11 @@ services:
       - "5436:5432"
     volumes:
       - auth-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - shop-platform-network
 
@@ -54,7 +59,8 @@ services:
       - Jwt__Audience=shop-platform
       - Jwt__ExpiresDays=7
     depends_on:
-      - auth-db
+      auth-db:
+        condition: service_healthy
     networks:
       - shop-platform-network
 

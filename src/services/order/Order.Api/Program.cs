@@ -3,10 +3,15 @@ using Order.Application.Services;
 using Order.Infrastructure.Persistence;
 using Order.Infrastructure.Messaging;
 using Order.Infrastructure.GrpcClients;
+using BuildingBlocks.Logging;
 
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Подключаем логирование
+
+builder.ConfigureLogging("OrderService");
 
 // Регистрация контроллеров
 

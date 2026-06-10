@@ -1,6 +1,9 @@
 using Moderation.Api.Grpc;
+using BuildingBlocks.Logging;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.ConfigureLogging("ModerationService");
 
 builder.Services.AddGrpc();
 

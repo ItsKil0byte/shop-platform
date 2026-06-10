@@ -1,10 +1,13 @@
 using Grpc.Core;
+using Microsoft.Extensions.Logging;
 using Moderation.Grpc;
 
 namespace Moderation.Api.Grpc;
 
-public class ModerationGrpcService : ModerationService.ModerationServiceBase
+public class ModerationGrpcService(ILogger<ModerationGrpcService> logger) : ModerationService.ModerationServiceBase
 {
+    private readonly ILogger<ModerationGrpcService> _logger = logger;
+
     private static readonly HashSet<string> BannedUsers = new(StringComparer.OrdinalIgnoreCase)
     {
         "banned_user_123",
@@ -16,7 +19,7 @@ public class ModerationGrpcService : ModerationService.ModerationServiceBase
     {
         bool isBlocked = BannedUsers.Contains(request.UserId);
 
-        Console.WriteLine($"Проверка пользовать '{request.UserId}'. Результат: {isBlocked}");
+        _logger.LogInformation("Проверяем статус пользователя. Пользователь: {UserId}. Заблокирован: {IsBlocked}", request.UserId, isBlocked);
 
         return Task.FromResult(new CheckUserResponse
         {

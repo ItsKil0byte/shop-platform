@@ -56,6 +56,65 @@ services:
       - "5081:8080"
     networks:
       - shop-platform-network
+    
+  catalog-db:
+    image: postgres:17-alpine
+    container_name: catalog-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: CatalogDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - catalog-db-data:/var/lib/postgresql/data
+    networks:
+      - shop-platform-network
+  
+  catalog-api:
+    image: shop-platform/catalog-api:latest
+    container_name: catalog-api
+    build:
+      context: ../
+      dockerfile: src/services/catalog/Catalog.Api/Dockerfile
+    ports:
+      - "5056:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - catalog-db
+    networks:
+      - shop-platform-network
+  
+  cart-db:
+    image: postgres:17-alpine
+    container_name: cart-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: CartDb
+    ports:
+      - "5433:5432"
+    volumes:
+      - cart-db-data:/var/lib/postgresql/data
+    networks:
+      - shop-platform-network
+  
+  cart-api:
+    image: shop-platform/cart-api:latest
+    container_name: cart-api
+    build:
+      context: ../
+      dockerfile: src/services/cart/Cart.Api/Dockerfile
+    ports:
+      - "5057:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - cart-db
+    networks:
+      - shop-platform-network
+  
 
   payment-db:
     image: postgres:17-alpine
@@ -122,6 +181,8 @@ services:
       
 volumes:
   order-db-data:
+  catalog-db-data:
+  cart-db-data:
   payment-db-data:
 
 networks:

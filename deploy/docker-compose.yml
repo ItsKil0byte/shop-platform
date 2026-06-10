@@ -24,6 +24,32 @@ services:
     networks:
       - shop-platform-network
 
+  smoke-test-ui:
+    image: shop-platform/smoke-test-ui:latest
+    container_name: smoke-test-ui
+    build:
+      context: ../src/frontend/smoke-test-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      - gateway-api
+    networks:
+      - shop-platform-network
+
+  aero-smoke-test-ui:
+    image: shop-platform/aero-smoke-test-ui:latest
+    container_name: aero-smoke-test-ui
+    build:
+      context: ../src/frontend/aero-smoke-test-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3002:80"
+    depends_on:
+      - gateway-api
+    networks:
+      - shop-platform-network
+
   auth-db:
     image: postgres:17-alpine
     container_name: auth-db

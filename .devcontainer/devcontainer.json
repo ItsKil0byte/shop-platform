@@ -11,9 +11,10 @@
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		5672, // RabbitMQ
-		15672, // RabbitMQ 
-		8500 // Consul UI
+		5000, 5001, 5050, 5055, // Gateway /Api / Auth / Order
+		5432, 5435, 5436, // PostgreSQL
+		5672, 15672,      // RabbitMQ client + UI
+		8500              // Consul UI
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",

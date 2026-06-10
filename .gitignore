@@ -5,6 +5,33 @@
 
 # dotenv files
 .env
+.env.*
+*.env
+*.env.*
+
+# Local Docker Compose overrides and generated runtime data
+docker-compose.override.yml
+compose.override.yml
+deploy/docker-compose.override.yml
+deploy/compose.override.yml
+docker-data/
+docker-volumes/
+volumes/
+
+# Local agent/tool caches
+.codex/
+.agents/
+.codegraph/
+dotnet/runfile-discovery/
+
+# Local scratch files
+*.bak
+*.orig
+*.rej
+*.local
+*.local.json
+*.local.yml
+*.local.yaml
 
 # User-specific files
 *.rsuser

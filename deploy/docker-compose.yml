@@ -11,6 +11,54 @@ services:
     networks:
       - shop-platform-network
 
+  gateway-api:
+    image: shop-platform/gateway-api:latest
+    container_name: gateway-api
+    build:
+      context: ../
+      dockerfile: src/gateway/Gateway.Api/Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - auth-api
+      - order-api
+    networks:
+      - shop-platform-network
+
+  auth-db:
+    image: postgres:17-alpine
+    container_name: auth-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: AuthDb
+    ports:
+      - "5436:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+    networks:
+      - shop-platform-network
+
+  auth-api:
+    image: shop-platform/auth-api:latest
+    container_name: auth-api
+    build:
+      context: ../
+      dockerfile: src/services/auth/Auth.Api/Dockerfile
+    ports:
+      - "5050:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=auth-db;Port=5432;Database=AuthDb;Username=postgres;Password=postgres;
+      - Jwt__Secret=${JWT_SECRET:-development-secret-change-before-production-32-chars}
+      - Jwt__Issuer=shop-platform
+      - Jwt__Audience=shop-platform
+      - Jwt__ExpiresDays=7
+    depends_on:
+      - auth-db
+    networks:
+      - shop-platform-network
+
   order-db:
     image: postgres:17-alpine
     container_name: order-db
@@ -36,11 +84,20 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - Logging__SeqUrl=http://seq:80
+      - RabbitMq__Host=rabbitmq
+      - GrpcClients__ModerationUrl=http://moderation-api:8080
+      - GrpcClients__PaymentUrl=http://payment-api:8080
     depends_on:
-      - order-db
-      - moderation-api
-      - payment-api
-      - rabbitmq
+      order-db:
+        condition: service_started
+      moderation-api:
+        condition: service_started
+      payment-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      seq:
+        condition: service_started
     networks:
       - shop-platform-network
 
@@ -51,9 +108,12 @@ services:
       context: ../
       dockerfile: src/services/moderation/Moderation.Api/Dockerfile
     environment:
+      - ASPNETCORE_ENVIRONMENT=Production
       - Logging__SeqUrl=http://seq:80
     ports:
       - "5081:8080"
+    depends_on:
+      - seq
     networks:
       - shop-platform-network
 
@@ -65,16 +125,16 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: PaymentDb
     ports:
-      - "5436:5432"
+      - "5437:5432"
     volumes:
       - payment-db-data:/var/lib/postgresql/data
-    networks:
-      - shop-platform-network
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - shop-platform-network
 
   payment-api:
     image: shop-platform/payment-api:latest
@@ -86,6 +146,12 @@ services:
       - "5003:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=payment-db;Port=5432;Database=PaymentDb;Username=postgres;Password=postgres;
+      - Consul__Host=http://consul:8500
+      - Consul__ServiceName=payment-service
+      - Consul__ServiceId=payment-service-1
+      - Consul__ServiceHost=payment-api
+      - Consul__ServicePort=8080
     depends_on:
       payment-db:
         condition: service_healthy
@@ -102,6 +168,34 @@ services:
       - "15672:15672" # UI (guest/guest)
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - shop-platform-network
+
+  notification-worker:
+    image: shop-platform/notification-worker:latest
+    container_name: notification-worker
+    build:
+      context: ../
+      dockerfile: src/services/notification/Notification.Worker/Dockerfile
+    environment:
+      - RabbitMq__Host=rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - shop-platform-network
+
+  consul:
+    image: hashicorp/consul:1.18
+    container_name: consul
+    ports:
+      - "8500:8500"
+    command: agent -dev -client=0.0.0.0 -ui
+    healthcheck:
+      test: ["CMD", "consul", "members"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -137,7 +231,10 @@ services:
       - shop-platform-network
       
 volumes:
+  auth-db-data:
   order-db-data:
+  catalog-db-data:
+  cart-db-data:
   payment-db-data:
 
 networks:

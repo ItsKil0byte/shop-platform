@@ -1,0 +1,14 @@
+@Gateway_HostAddress = http://localhost:5000
+
+GET {{Gateway_HostAddress}}/health
+
+###
+
+POST {{Gateway_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+

@@ -3,6 +3,7 @@
 WORKDIR /app
 
 COPY contracts/ /app/contracts/
+COPY src/building-blocks/ /app/src/building-blocks/
 
 COPY src/services/cart/Cart.Domain/ /app/src/services/cart/Cart.Domain/
 COPY src/services/cart/Cart.Application/ /app/src/services/cart/Cart.Application/

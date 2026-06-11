@@ -21,6 +21,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    CartDbContext db = scope.ServiceProvider.GetRequiredService<CartDbContext>();
+    db.Database.Migrate();
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

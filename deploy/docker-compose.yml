@@ -117,12 +117,18 @@ services:
       context: ../
       dockerfile: src/services/catalog/Catalog.Api/Dockerfile
     ports:
-      - "5256:8080"
+      - "5056:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Host=catalog-db;Port=5432;Database=CatalogDb;Username=postgres;Password=postgres;
+      - Consul__Host=http://consul:8500
+      - Consul__ServiceName=catalog-service
+      - Consul__ServiceId=catalog-service-1
+      - Consul__ServiceHost=catalog-api
+      - Consul__ServicePort=8080
     depends_on:
       catalog-db:
+        condition: service_started
+      consul:
         condition: service_healthy
     networks:
       - shop-platform-network
@@ -153,12 +159,18 @@ services:
       context: ../
       dockerfile: src/services/cart/Cart.Api/Dockerfile
     ports:
-      - "5082:8080"
+      - "5057:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Host=cart-db;Port=5432;Database=CartDb;Username=postgres;Password=postgres;
+      - Consul__Host=http://consul:8500
+      - Consul__ServiceName=cart-service
+      - Consul__ServiceId=cart-service-1
+      - Consul__ServiceHost=cart-api
+      - Consul__ServicePort=8080
     depends_on:
       cart-db:
+        condition: service_started
+      consul:
         condition: service_healthy
     networks:
       - shop-platform-network

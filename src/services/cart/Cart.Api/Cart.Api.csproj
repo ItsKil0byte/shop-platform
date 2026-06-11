@@ -10,6 +10,12 @@
     <ItemGroup>
         <Protobuf Include="..\..\..\..\contracts\grpc\cart.proto" GrpcServices="Server" />
     </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="grpc.aspnetcore.server.reflection" Version="2.80.0" />
+        <ProjectReference Include="..\..\..\..\src\building-blocks\Consul\BuildingBlocks.Consul.csproj" />
+        <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.67.0" />
+    </ItemGroup>
     
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.80.0" />

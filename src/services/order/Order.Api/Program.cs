@@ -4,6 +4,7 @@ using Order.Infrastructure.Persistence;
 using Order.Infrastructure.Messaging;
 using Order.Infrastructure.GrpcClients;
 using BuildingBlocks.Logging;
+using BuildingBlocks.Consul;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,10 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Подключаем логирование
 
 builder.ConfigureLogging("OrderService");
+
+// Подключаем Consul
+
+builder.Services.AddConsul(builder.Configuration);
 
 // Регистрация контроллеров
 
@@ -71,6 +76,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseConsul();
 
 app.UseAuthorization();
 app.MapControllers();

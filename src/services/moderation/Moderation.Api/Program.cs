@@ -9,11 +9,15 @@ builder.ConfigureLogging("ModerationService");
 
 builder.Services.AddGrpc();
 
+builder.Services.AddGrpcHealthChecks()
+    .AddCheck("moderation", () => Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Healthy());
+
 WebApplication app = builder.Build();
 
 app.UseConsul();
 
 app.MapGrpcService<ModerationGrpcService>();
+app.MapGrpcHealthChecksService();
 
 app.MapGet("/", () => "Ты помоему перепутал.");
 

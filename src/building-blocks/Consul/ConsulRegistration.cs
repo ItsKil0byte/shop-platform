@@ -32,25 +32,39 @@ public static class ConsulRegistration
         IConfiguration config = app.ApplicationServices.GetRequiredService<IConfiguration>();
 
         string serviceName = config["Consul:ServiceName"] ?? "unknown-service";
-        string serviceId   = config["Consul:ServiceId"]   ?? $"{serviceName}-{Guid.NewGuid()}";
+        string serviceId = config["Consul:ServiceId"] ?? $"{serviceName}-{Guid.NewGuid()}";
         string serviceHost = config["Consul:ServiceHost"] ?? "localhost";
-        int    servicePort = int.Parse(config["Consul:ServicePort"] ?? "8080");
-        string consulHost  = config["Consul:Host"] ?? "http://consul:8500";
+        int servicePort = int.Parse(config["Consul:ServicePort"] ?? "8080");
+        string consulHost = config["Consul:Host"] ?? "http://consul:8500";
+        string? healthCheckPath = config["Consul:HealthCheckPath"];
 
         AgentServiceRegistration registration = new()
         {
-            ID      = serviceId,
-            Name    = serviceName,
+            ID = serviceId,
+            Name = serviceName,
             Address = serviceHost,
-            Port    = servicePort,
-            Check = new AgentServiceCheck
+            Port = servicePort
+        };
+
+        if (!string.IsNullOrEmpty(healthCheckPath))
+        {
+            registration.Check = new AgentServiceCheck
+            {
+                HTTP = $"http://{serviceHost}:{servicePort}{healthCheckPath}",
+                Interval = TimeSpan.FromSeconds(10),
+                DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(30)
+            };
+        }
+        else
+        {
+            registration.Check = new AgentServiceCheck
             {
                 GRPC = $"{serviceHost}:{servicePort}",
                 GRPCUseTLS = false,
                 Interval = TimeSpan.FromSeconds(10),
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(30)
-            }
-        };
+            };
+        }
 
         lifetime.ApplicationStarted.Register(() =>
         {

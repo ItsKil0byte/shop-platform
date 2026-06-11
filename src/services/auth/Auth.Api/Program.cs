@@ -2,8 +2,10 @@ using System.Text;
 using Auth.Application.Interfaces;
 using Auth.Application.Services;
 using Auth.Infrastructure;
+using Auth.Infrastructure.Persistence;
 using Auth.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -41,6 +43,12 @@ builder.Services.AddAuthorization();
 
 WebApplication app = builder.Build();
 
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    AuthDbContext dbContext = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+    dbContext.Database.Migrate();
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -56,4 +64,3 @@ app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "auth" }))
 app.Run();
 
 public partial class Program;
-

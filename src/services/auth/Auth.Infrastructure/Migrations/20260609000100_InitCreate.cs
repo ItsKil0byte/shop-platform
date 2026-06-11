@@ -1,10 +1,14 @@
 using System;
+using Auth.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Auth.Infrastructure.Migrations;
 
+[DbContext(typeof(AuthDbContext))]
+[Migration("20260609000100_InitCreate")]
 public partial class InitCreate : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)

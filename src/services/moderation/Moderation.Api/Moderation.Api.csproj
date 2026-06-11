@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.60.*" />
+    <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.60.*" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.27" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>

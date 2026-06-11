@@ -201,34 +201,6 @@ services:
       retries: 5
     networks:
       - shop-platform-network
-
-  notification-worker:
-     image: shop-platform/notification-worker:latest
-     container_name: notification-worker
-     build:
-       context: ../
-       dockerfile: src/services/notification/Notification.Worker/Dockerfile
-     environment:
-       - RabbitMq__Host=rabbitmq
-     depends_on:
-       rabbitmq:
-         condition: service_healthy
-     networks:
-       - shop-platform-network
-
-  consul:
-    image: hashicorp/consul:1.18
-    container_name: consul
-    ports:
-      - "8500:8500"   # UI + HTTP API
-    command: agent -dev -client=0.0.0.0 -ui
-    healthcheck:
-      test: ["CMD", "consul", "members"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - shop-platform-network
       
 volumes:
   auth-db-data:

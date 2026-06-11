@@ -20,7 +20,8 @@ builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 
 builder.Services.AddHealthChecks();
-builder.Services.AddGrpcHealthChecks();
+builder.Services.AddGrpcHealthChecks()
+    .AddCheck("payment", () => Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Healthy());
 
 // Consul
 builder.Services.AddConsul(builder.Configuration);
